@@ -5,68 +5,70 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Account from "./pages/Account";
+import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        load: false
+        loadData: false,
+        loadCategories: false
     };
   }
 
   componentDidMount(){         
+    initializeIcons();
     fetch('https://fakestoreapi.com/products')
           .then(res=>res.json())
           .then(json=> {this.props.dispatch({ 
                         type: 'STORE PRODUCTS',
                         payload: json
                       })
-                    this.setState({load: true})}
-                )       
+                    this.setState({loadData: true})}
+                )    
+
+    fetch('https://fakestoreapi.com/products/categories')
+          .then(res=>res.json())
+          .then(json=>{this.props.dispatch({ 
+                        type: 'STORE CATEGORIES',
+                        payload: json
+                      });
+                      this.setState({loadCategories: true})}
+                )
   }
 
   render() {
-    const {load} = this.state;
-    
+    const {loadData, loadCategories} = this.state;
+
     return (
-      load &&
-        <div className="navigation">
-          <Router>
-            <div>
-              <ul>
-                <li>
-                  <Link to="/">Products</Link>
-                </li>
-                <li>
-                  <Link to="/cart">Cart</Link>
-                </li>
-                <li>
-                  <Link to="/account">Account</Link>
-                </li>
-              </ul>
+      loadData && loadCategories &&
+        <Router>
+            <ul className="navigation">
+              <li>
+                <Link to="/">Products</Link>
+              </li>
+              <li>
+                <Link to="/cart">Cart</Link>
+              </li>
+              <li>
+                <Link to="/account">Account</Link>
+              </li>
+            </ul>
 
-              <hr />
-
-              <Switch>
-                <Route exact path="/">
-                  <Products />
-                </Route>
-                <Route path="/cart">
-                  <Cart />
-                </Route>
-                <Route path="/account">
-                  <Account />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </div>
+            <Switch>
+              <Route exact path="/">
+                <Products />
+              </Route>
+              <Route path="/cart">
+                <Cart />
+              </Route>
+              <Route path="/account">
+                <Account />
+              </Route>
+            </Switch>
+        </Router>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {}
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-// combine reducers!!!!!
-
 const initialState = {
     account:{
         userId: 1,
@@ -18,28 +16,20 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action) {
-    const newState = {...state}
+    const newState = {...state};
+    let cart = [...state.cart];
 
     switch (action.type) {
         case 'EDIT ACCOUNT':
             newState.account = action.payload;
             return newState;
         case 'STORE PRODUCTS':
-            //get all available categories
-            const products = action.payload;
-            const categories = [];
-
-            products.map(item => {
-                const cat = item.category;
-                if(!categories.includes(cat))
-                    categories.push(cat);
-            })
-
-            newState.products = products;
-            newState.productCategories = categories;
+            newState.products = action.payload;
+            return newState;
+        case 'STORE CATEGORIES':
+            newState.productCategories = action.payload;
             return newState;
         case 'ADD TO CART':
-            let cart = [...state.cart];
             let hasItem = false;
             
             cart.forEach(item => {
@@ -53,6 +43,15 @@ export default function reducer(state = initialState, action) {
                 cart = [...cart, { item: action.payload, quantity:1 }];
             }
 
+            newState.cart = cart;
+            return newState;
+        case 'CHANGE QUANTITY':
+            cart.forEach(item => {
+                if(_.isEqual(item.item, action.payload.prod)){
+                    item.quantity = action.payload.quantity;
+                }
+            })
+            
             newState.cart = cart;
             return newState;
         default:

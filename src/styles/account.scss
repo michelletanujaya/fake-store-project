@@ -1,0 +1,72 @@
+@import "./variables.scss";
+
+.common-page {
+  margin: 0;
+}
+.account-page {
+  width: 50vw;
+  margin: 70px auto auto;
+  min-width: 800px;
+
+  @extend .flex-column;
+
+  .account-row {
+    @extend .flex-row;
+
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    .title {
+      width: 15vw;
+      span {
+        font-size: 20px;
+      }
+    }
+
+    .details {
+      display: flex;
+      flex: 1;
+
+      .ms-TextField,
+      .ms-TextField-wrapper,
+      .ms-TextField-fieldGroup {
+        display: flex;
+        flex: 1;
+      }
+    }
+  }
+
+  .button-row {
+    @extend .flex-row;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 20px;
+    }
+  }
+}
+
+@media (max-width: 890px) {
+  .account-page {
+    width: 100%;
+    min-width: auto;
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 660px) {
+  .account-page {
+    padding: 0;
+    .account-row {
+      flex-direction: column;
+      padding: 0 10px;
+      .title {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+    .button-row {
+      padding: 0 10px;
+    }
+  }
+}

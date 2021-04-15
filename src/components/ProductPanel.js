@@ -9,7 +9,7 @@ class ProductPanel extends React.Component {
         dispatch({
             type: 'ADD TO CART',
             payload: item
-        })
+        });
     }
 
     render(){
@@ -18,20 +18,22 @@ class ProductPanel extends React.Component {
         return (
             <div className="product-panel">
                 <div className="product-image">
-                    <img alt="image" src={item.image} width="150" height="70" />
+                    <img alt="image" src={item.image} />
                 </div>
-                <div className="product-title">
-                    <span>{item.title}</span>
-                </div>
-                <div className="product-description">
-                    <p>{item.description}</p>
-                </div>
-                <div className="product-footer">
-                    <div className="product-price">
-                        <span>{item.price}</span>
+                <div className="product-desc">
+                    <div className="product-title">
+                        <span>{item.title}</span>
                     </div>
-                    <div className="addtocart-button">
-                        <PrimaryButton onClick={() => this.addToCart(item)} text="Add To Cart" />
+                    <div className="product-description">
+                        <p>{item.description}</p>
+                    </div>
+                    <div className="product-footer">
+                        <div className="product-price">
+                            <span>$ {item.price}</span>
+                        </div>
+                        <div className="addtocart-button">
+                            <PrimaryButton onClick={() => this.addToCart(item)} text="Add To Cart" />
+                        </div>
                     </div>
                 </div>
             </div>

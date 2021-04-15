@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import MissingPage from './MissingPage';
 import ProductPanel from '../components/ProductPanel'
 
 import { Checkbox, Dropdown, SearchBox } from '@fluentui/react/lib';
@@ -30,31 +29,30 @@ class Products extends React.Component {
         let newCategories = [...selectedCategories];
 
         if(checked){
-            newCategories.push(label)
+            newCategories.push(label);
         }else{
             newCategories = newCategories.filter(cat => {
                 return cat !== label;
-            })
+            });
         }
         
         this.setState({
             selectedCategories: newCategories
-        })
+        });
     }
 
     selectSortBy = (item) => {
-        console.log(item.key)
         this.setState({
             sortby: item.key
-        })
+        });
     }
 
     changeSearchText = (text) => {
-        this.setState({searchText: text})
+        this.setState({searchText: text});
     }
 
     selectSearch = (text) => {
-        this.setState({searchby: text.trim()})
+        this.setState({searchby: text.trim()});
     }
 
     render() {
@@ -85,69 +83,64 @@ class Products extends React.Component {
         if(selectedCategories.length > 0){
             filteredProducts = filteredProducts.filter(item => {
                 return selectedCategories.includes(item.category);
-            })
+            });
         }
 
         //filter by search bar
         if(searchby.length > 0){
             filteredProducts = filteredProducts.filter(item => {
                 return item.title.toLowerCase().indexOf(searchby.toLowerCase()) > -1;
-            })
+            });
         }
         
-
-        console.log(filteredProducts)
-        if(filteredProducts.length > 0){
-            return (
-                <div className="common-page">
-                    <div className="product-page">
-                        <div className="filter-section">
-                            <div className="filter-box">
-                                <SearchBox 
-                                    placeholder="Search" 
-                                    onChange={(_, newValue) => this.changeSearchText(newValue)} 
-                                    onSearch={newValue => this.selectSearch(newValue)}
-                                    value={searchText} 
+        return (
+            filteredProducts.length > 0 &&
+            <div className="common-page">
+                <div className="product-page">
+                    <div className="filter-section">
+                        <div className="filter-box">
+                            <SearchBox 
+                                placeholder="Search" 
+                                onChange={(_, newValue) => this.changeSearchText(newValue)} 
+                                onSearch={newValue => this.selectSearch(newValue)}
+                                value={searchText} 
+                            />
+                        </div>
+                        <div className="filter-box">
+                            <div className="filter-title">
+                                Categories
+                            </div>
+                            <div className="filter-category">
+                                {productCategories.map(cat => {
+                                    return <Checkbox 
+                                                label= {cat}
+                                                checked={selectedCategories.includes(cat)} 
+                                                onChange={(e, checked)=> {this.selectCategory(e, checked)}} 
+                                            />
+                                })}
+                            </div>
+                        </div>
+                        <div className="filter-box">
+                            <div className="filter-title">
+                                Sort By
+                            </div>
+                            <div className="filter-sortby">
+                                <Dropdown
+                                    selectedKey={sortby}
+                                    options={sortByOptions}
+                                    onChange={(_, item)=> {this.selectSortBy(item)}}
                                 />
                             </div>
-                            <div className="filter-box">
-                                <div className="filter-title">
-                                    Category
-                                </div>
-                                <div className="filter-category">
-                                    {productCategories.map(cat => {
-                                        return <Checkbox 
-                                                    label= {cat}
-                                                    checked={selectedCategories.includes(cat)} 
-                                                    onChange={(e, checked)=> {this.selectCategory(e, checked)}} 
-                                                />
-                                    })}
-                                </div>
-                            </div>
-                            <div className="filter-box">
-                                <div className="filter-title">
-                                    Sort By
-                                </div>
-                                <div className="filter-sortby">
-                                    <Dropdown
-                                        selectedKey={sortby}
-                                        options={sortByOptions}
-                                        onChange={(_, item)=> {this.selectSortBy(item)}}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-section">
-                            {filteredProducts.map(item => {
-                                return <ProductPanel item= {item}/>
-                            })}
                         </div>
                     </div>
+                    <div className="product-section">
+                        {filteredProducts.map(item => {
+                            return <ProductPanel item= {item}/>
+                        })}
+                    </div>
                 </div>
-            );
-        }else{
-            return(<MissingPage/>)
-        }
+            </div>
+        );
     }
 }
 

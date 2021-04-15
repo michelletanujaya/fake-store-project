@@ -1,0 +1,60 @@
+@import "./variables.scss";
+
+html,
+body,
+#root {
+  display: flex;
+  flex: 1;
+  font-size: 16px;
+  color: #484848;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ms-Button--primary {
+  border: 1px solid $default-blue;
+  background-color: $default-blue;
+}
+
+#root {
+  @extend .flex-column;
+}
+
+a {
+  text-decoration: none;
+  color: #484848;
+}
+
+.navigation {
+  display: flex;
+  margin: 0;
+  width: 80%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  list-style-type: none;
+
+  @extend .flex-row;
+
+  li {
+    margin-right: 30px;
+
+    a {
+      font-size: 25px;
+    }
+
+    &:hover a {
+      color: $default-blue;
+    }
+  }
+}
+
+.common-page {
+  border-top: 1px solid #484848;
+  margin: 20px;
+  display: flex;
+  flex: 1;
+  min-height: calc(100% - 500px);
+}
