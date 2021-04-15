@@ -6,33 +6,28 @@ class Cart extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          cart: [],
-          resetState:false
       };
-    }
-
-    resetState = () => {
-        const {cart} = this.props;
-        this.setState({cart});
-    }
-
-    componentDidMount(){
-        this.resetState();
     }
     
     changeQuantity = (prod, item) => {
         const {dispatch} = this.props;
+        let type;
+        const quantity = item.key;
+        
+        if(quantity > 0){
+            type = 'CHANGE QUANTITY';
+        }else{
+            type = 'REMOVE FROM CART';
+        }
         
         dispatch({
-            type: 'CHANGE QUANTITY',
-            payload: {prod: prod.item, quantity: item.key}
-        }, () => {
-            this.resetState()
+            type,
+            payload: {prod: prod.item, quantity}
         });
     }
 
     render() {
-        const {cart} = this.state;
+        const {cart} = this.props;
         
         return (
             <div className="common-page">

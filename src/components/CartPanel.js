@@ -9,6 +9,7 @@ class CartPanel extends React.Component {
 
         //Assuming there's only 4 quantities available in the store per product
         let quantities = [
+            { key: 0, text: '0' },
             { key: 1, text: '1' },
             { key: 2, text: '2' },
             { key: 3, text: '3' },

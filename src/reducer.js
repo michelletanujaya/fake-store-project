@@ -54,6 +54,13 @@ export default function reducer(state = initialState, action) {
             
             newState.cart = cart;
             return newState;
+        case 'REMOVE FROM CART':
+            const newCart = cart.filter((item)=> {
+                return !_.isEqual(item.item, action.payload.prod);
+            })
+            
+            newState.cart = [...newCart];
+            return newState;
         default:
             return state
     }
