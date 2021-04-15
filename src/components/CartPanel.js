@@ -30,7 +30,7 @@ class CartPanel extends React.Component {
             <div className="cart-panel">
                 <div className="cart-desc">
                     <div className="cart-image">
-                        <img alt="image" src={item.image} />
+                        <img alt="cart-img" src={item.image} />
                     </div>
                     <div className="cart-title">
                         <span>{item.title}</span>

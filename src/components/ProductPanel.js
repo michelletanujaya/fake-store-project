@@ -18,7 +18,7 @@ class ProductPanel extends React.Component {
         return (
             <div className="product-panel">
                 <div className="product-image">
-                    <img alt="image" src={item.image} />
+                    <img alt="product-img" src={item.image} />
                 </div>
                 <div className="product-desc">
                     <div className="product-title">

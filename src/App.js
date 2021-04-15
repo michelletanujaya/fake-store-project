@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
-import Account from "./pages/Account";
+import {Products, Cart, Account} from "./pages";
 import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 class App extends React.Component {
