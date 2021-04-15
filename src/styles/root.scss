@@ -58,3 +58,10 @@ a {
   flex: 1;
   min-height: calc(100% - 500px);
 }
+
+@media (max-width: 550px) {
+  .navigation {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}

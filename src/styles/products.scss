@@ -110,21 +110,18 @@
     .product-section {
       .product-panel,
       .product-desc .product-title span {
-        min-width: 30vw;
-        max-width: 30vw;
-      }
-    }
-  }
-}
-
-@media (max-width: 1310px) {
-  .product-page {
-    .product-section {
-      .product-panel,
-      .product-desc .product-title span {
         min-width: none;
         max-width: none;
-        width: 100%;
+      }
+
+      .product-panel {
+        .product-desc {
+          .product-title {
+            span {
+              width: 70vw;
+            }
+          }
+        }
       }
     }
   }
@@ -151,6 +148,18 @@
     .filter-section {
       padding: 20px;
       padding-bottom: 0;
+
+      .filter-box {
+        margin-bottom: 10px;
+
+        .filter-title {
+          font-size: 14px;
+        }
+
+        .ms-Checkbox {
+          margin-bottom: 3px;
+        }
+      }
     }
     .product-section {
       flex-direction: column;
