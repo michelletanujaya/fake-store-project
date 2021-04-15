@@ -54,6 +54,7 @@
         margin-bottom: 30px;
         img {
           max-width: 220px;
+          max-height: 200px;
           margin: auto;
         }
       }
@@ -110,18 +111,32 @@
     .product-section {
       .product-panel,
       .product-desc .product-title span {
+        min-width: 30vw;
+        max-width: 30vw;
+      }
+    }
+  }
+}
+
+@media (max-width: 1083px) {
+  .product-page {
+    .product-section {
+      .product-panel,
+      .product-desc .product-title span {
+        min-width: 28vw;
+        max-width: 28vw;
+      }
+    }
+  }
+}
+
+@media (max-width: 986px) {
+  .product-page {
+    .product-section {
+      .product-panel,
+      .product-desc .product-title span {
         min-width: none;
         max-width: none;
-      }
-
-      .product-panel {
-        .product-desc {
-          .product-title {
-            span {
-              width: 70vw;
-            }
-          }
-        }
       }
     }
   }
